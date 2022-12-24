@@ -7,19 +7,21 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
-// import { useState } from "react";
+
+import LoginForm from "../Components/LoginForm";
+import { useState } from "react";
 // import RegisterForm from "../Components/RegisterForm";
 
 const LoginScreen = () => {
   const image = require("../assets/images/PhotoBG.jpg");
 
-  // const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  // const onFocus = () => {
-  //   setIsShowKeyboard(true);
-  // };
-  // const onBlur = () => {
-  //   setIsShowKeyboard(false);
-  // };
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const onFocus = () => {
+    setIsShowKeyboard(true);
+  };
+  const onBlur = () => {
+    setIsShowKeyboard(false);
+  };
 
   return (
     <View style={styles.mainBox}>
@@ -37,7 +39,7 @@ const LoginScreen = () => {
             <View style={styles.titleBox}>
               <Text style={styles.title}>Войти</Text>
             </View>
-
+            <LoginForm onFocus={onFocus} onBlur={onBlur} />
             <View style={styles.linkBox}>
               <TouchableOpacity activeOpacity={0.7}>
                 <Text style={styles.link}>
@@ -64,8 +66,8 @@ const styles = StyleSheet.create({
   inner: {
     position: "relative",
     paddingHorizontal: 16,
-    paddingTop: 92,
-    paddingBottom: 45,
+    paddingTop: 32,
+    paddingBottom: 111,
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
