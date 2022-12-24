@@ -1,4 +1,11 @@
-import { StyleSheet, TextInput, Keyboard, View } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  Keyboard,
+  View,
+  Pressable,
+  Text,
+} from "react-native";
 import { useState } from "react";
 
 import AppButton from "./AppButton";
@@ -10,6 +17,19 @@ const initialState = {
 
 const LoginForm = ({ onFocus, onBlur }) => {
   const [state, setState] = useState(initialState);
+
+  const [emailFocused, setEmailFocused] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
+
+  const [isPasswordVisibile, setIsPasswordVisibile] = useState(false);
+
+  const handlePassVisibility = () => {
+    if (isPasswordVisibile) {
+      setIsPasswordVisibile(false);
+      return;
+    }
+    setIsPasswordVisibile(true);
+  };
 
   const onLogin = () => {
     console.log(state);
@@ -25,22 +45,50 @@ const LoginForm = ({ onFocus, onBlur }) => {
         onChangeText={(text) =>
           setState((prevState) => ({ ...prevState, email: text }))
         }
-        style={styles.input}
-        onFocus={onFocus}
-        onBlur={onBlur}
-      />
-      <TextInput
-        placeholder="Пароль"
-        placeholderTextColor="#BDBDBD"
-        secureTextEntry={true}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        value={state.password}
-        onChangeText={(text) =>
-          setState((prevState) => ({ ...prevState, password: text }))
+        style={
+          emailFocused ? { ...styles.input, ...styles.onFocused } : styles.input
         }
-        style={{ ...styles.input, marginBottom: 43 }}
+        onFocus={() => {
+          onFocus();
+          setEmailFocused(true);
+        }}
+        onBlur={() => {
+          onBlur();
+          setEmailFocused(false);
+        }}
       />
+      <View style={styles.pressableBox}>
+        <TextInput
+          placeholder="Пароль"
+          placeholderTextColor="#BDBDBD"
+          secureTextEntry={!isPasswordVisibile}
+          onFocus={() => {
+            onFocus();
+            setPasswordFocused(true);
+          }}
+          onBlur={() => {
+            onBlur();
+            setPasswordFocused(false);
+          }}
+          value={state.password}
+          onChangeText={(text) =>
+            setState((prevState) => ({ ...prevState, password: text }))
+          }
+          style={
+            passwordFocused
+              ? { ...styles.input, marginBottom: 0, ...styles.onFocused }
+              : { ...styles.input, marginBottom: 0 }
+          }
+        />
+        <Pressable
+          onPress={handlePassVisibility}
+          style={{ position: "absolute", right: 16, top: "40%" }}
+        >
+          <Text style={styles.showField}>
+            {!isPasswordVisibile ? "Показать" : "Скрыть"}
+          </Text>
+        </Pressable>
+      </View>
       <AppButton title={"Зарегистрироваться"} onPress={onLogin} />
     </View>
   );
@@ -62,8 +110,19 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     padding: 16,
   },
-  inputFocused: {
+  onFocused: {
     borderColor: "#FF6C00",
     backgroundColor: "#FFFFFF",
+    borderWidth: 2,
+  },
+  pressableBox: {
+    position: "relative",
+    marginBottom: 43,
+  },
+  showField: {
+    fontFamily: "Roboto400",
+    fontSize: 16,
+    lineHeight: 19,
+    color: "#1B4371",
   },
 });

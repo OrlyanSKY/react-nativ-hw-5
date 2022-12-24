@@ -9,19 +9,19 @@ import {
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-// import RegistrationScreen from "./Screens/RegistrationScreen";
-import LoginScreen from "./Screens/LoginScreen";
+import RegistrationScreen from "./Screens/RegistrationScreen";
+// import LoginScreen from "./Screens/LoginScreen";
 
 export default function App() {
-  useEffect(() => {
-    const onRotate = () => {
-      const width = Dimensions.get("window").width;
-    };
-    Dimensions.addEventListener("change", onRotate);
-    return () => {
-      Dimensions.removeEventListener("change", onRotate);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const onRotate = () => {
+  //     const width = Dimensions.get("window").width;
+  //   };
+  //   Dimensions.addEventListener("change", onRotate);
+  //   return () => {
+  //     Dimensions.removeEventListener("change", onRotate);
+  //   };
+  // }, []);
 
   //Fonts
   const [fontsLoaded] = useFonts({
@@ -46,8 +46,8 @@ export default function App() {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        {/* <RegistrationScreen /> */}
-        <LoginScreen />
+        <RegistrationScreen />
+        {/* <LoginScreen /> */}
         <StatusBar style="auto" />
       </View>
     </TouchableWithoutFeedback>

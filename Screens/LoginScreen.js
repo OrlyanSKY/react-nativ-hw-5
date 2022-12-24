@@ -33,7 +33,7 @@ const LoginScreen = () => {
           <View
             style={{
               ...styles.inner,
-              // marginBottom: isShowKeyboard ? -165 : 0,
+              marginBottom: isShowKeyboard ? -200 : 0,
             }}
           >
             <View style={styles.titleBox}>
