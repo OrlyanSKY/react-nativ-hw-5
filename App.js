@@ -1,4 +1,6 @@
 import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import { useFonts } from "expo-font";
 import {
   StyleSheet,
   View,
@@ -6,9 +8,10 @@ import {
   Keyboard,
   Dimensions,
 } from "react-native";
-import { useEffect } from "react";
-import { useFonts } from "expo-font";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
+
 import RegistrationScreen from "./Screens/RegistrationScreen";
 // import LoginScreen from "./Screens/LoginScreen";
 
@@ -42,15 +45,17 @@ export default function App() {
   } else {
     SplashScreen.hideAsync();
   }
-
+  const Stack = createStackNavigator();
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.container}>
-        <RegistrationScreen />
-        {/* <LoginScreen /> */}
-        <StatusBar style="auto" />
-      </View>
-    </TouchableWithoutFeedback>
+    <NavigationContainer>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <RegistrationScreen />
+          {/* <LoginScreen /> */}
+          <StatusBar style="auto" />
+        </View>
+      </TouchableWithoutFeedback>
+    </NavigationContainer>
   );
 }
 
