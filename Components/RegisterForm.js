@@ -1,42 +1,58 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-} from "react-native";
-import React from "react";
+import { StyleSheet, View, TextInput, Keyboard } from "react-native";
+import { useState } from "react";
+import AppButton from "./AppButton";
 
-const RegisterForm = () => {
+const initialState = {
+  login: "",
+  email: "",
+  password: "",
+};
+
+const RegisterForm = ({ onFocus, onBlur, isFocused }) => {
+  const [state, setState] = useState(initialState);
+
+  const onRegister = () => {
+    console.log(state);
+    setState(initialState);
+    Keyboard.dismiss();
+  };
   return (
-    <View style={styles.inputContatiner}>
+    <View style={styles.form}>
       <TextInput
         placeholder="Логин"
         placeholderTextColor="#BDBDBD"
-        //   value={""}
-        //   onChangeText={text => setName(text)}
+        value={state.login}
+        onChangeText={(text) =>
+          setState((prevState) => ({ ...prevState, login: text }))
+        }
         style={styles.input}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
       <TextInput
         placeholder="Адрес электронной почты"
         placeholderTextColor="#BDBDBD"
-        //   value={""}
-        //   onChangeText={text => setName(text)}
+        value={state.email}
+        onChangeText={(text) =>
+          setState((prevState) => ({ ...prevState, email: text }))
+        }
         style={styles.input}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
       <TextInput
         placeholder="Пароль"
         placeholderTextColor="#BDBDBD"
-        //   value={""}
-        //   onChangeText={text => setName(text)}
-        style={[styles.input, styles.inputLastChild]}
+        secureTextEntry={true}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        value={state.password}
+        onChangeText={(text) =>
+          setState((prevState) => ({ ...prevState, password: text }))
+        }
+        style={{ ...styles.input, marginBottom: 43 }}
       />
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => {}} style={styles.button}>
-          <Text style={styles.buttonText}>Зарегистрироваться</Text>
-        </TouchableOpacity>
-      </View>
+      <AppButton title={"Зарегистрироваться"} onPress={onRegister} />
     </View>
   );
 };
@@ -44,36 +60,22 @@ const RegisterForm = () => {
 export default RegisterForm;
 
 const styles = StyleSheet.create({
-  inputContatiner: {},
+  form: {},
   input: {
     color: "#212121",
     fontFamily: "Roboto400",
     fontSize: 16,
+    lineHeight: 19,
     backgroundColor: "#F6F6F6",
-    height: 50,
+
     borderWidth: 1,
     borderColor: "#E8E8E8",
     borderRadius: 8,
     marginBottom: 16,
     padding: 16,
   },
-  inputLastChild: {
-    marginBottom: 43,
-  },
-  buttonContainer: {
-    marginBottom: 16,
-  },
-  button: {
-    backgroundColor: "#FF6C00",
-    padding: 16,
-    borderRadius: 100,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    lineHeight: 19,
-    fontFamily: "Roboto400",
+  inputFocused: {
+    borderColor: "#FF6C00",
+    backgroundColor: "#FFFFFF",
   },
 });
