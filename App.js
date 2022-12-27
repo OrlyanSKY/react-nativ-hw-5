@@ -12,8 +12,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
 
-import RegistrationScreen from "./Screens/RegistrationScreen";
-// import LoginScreen from "./Screens/LoginScreen";
+import RegistrationScreen from "./Screens/AuthScreens/RegistrationScreen";
+import LoginScreen from "./Screens/AuthScreens/LoginScreen";
+import Home from "./Screens/Home";
 
 export default function App() {
   // useEffect(() => {
@@ -48,19 +49,25 @@ export default function App() {
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={styles.container}>
-          <RegistrationScreen />
-          {/* <LoginScreen /> */}
-          <StatusBar style="auto" />
-        </View>
-      </TouchableWithoutFeedback>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegistrationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+// <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+// </TouchableWithoutFeedback>
+{
+  /* <StatusBar style="auto" /> */
+}

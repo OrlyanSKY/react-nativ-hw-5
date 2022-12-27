@@ -9,10 +9,10 @@ import {
   Image,
 } from "react-native";
 import { useState } from "react";
-import RegisterForm from "../Components/RegisterForm";
+import RegisterForm from "../../Components/RegisterForm";
 
-const RegistrationScreen = () => {
-  const image = require("../assets/images/PhotoBG.jpg");
+const RegistrationScreen = ({ navigation }) => {
+  const image = require("../../assets/images/PhotoBG.jpg");
 
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const onFocus = () => {
@@ -32,7 +32,7 @@ const RegistrationScreen = () => {
           <View
             style={{
               ...styles.inner,
-              marginBottom: isShowKeyboard ? -165 : 0,
+              marginBottom: isShowKeyboard ? -80 : 0,
             }}
           >
             <View
@@ -44,7 +44,7 @@ const RegistrationScreen = () => {
               ]}
             >
               <TouchableOpacity style={styles.addBtn}>
-                <Image source={require("../assets/images/add.png")} />
+                <Image source={require("../../assets/images/add.png")} />
               </TouchableOpacity>
             </View>
             <View style={styles.titleBox}>
@@ -56,7 +56,10 @@ const RegistrationScreen = () => {
               isFocused={isShowKeyboard}
             />
             <View style={styles.linkBox}>
-              <TouchableOpacity activeOpacity={0.7}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => navigation.navigate("Login")}
+              >
                 <Text style={styles.link}>Уже есть аккаунт? Войти</Text>
               </TouchableOpacity>
             </View>

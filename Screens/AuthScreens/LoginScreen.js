@@ -3,17 +3,19 @@ import {
   Text,
   View,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
   Platform,
   ImageBackground,
   TouchableOpacity,
+  Keyboard,
 } from "react-native";
 
-import LoginForm from "../Components/LoginForm";
+import LoginForm from "../../Components/LoginForm";
 import { useState } from "react";
 // import RegisterForm from "../Components/RegisterForm";
 
-const LoginScreen = () => {
-  const image = require("../assets/images/PhotoBG.jpg");
+const LoginScreen = ({ navigation }) => {
+  const image = require("../../assets/images/PhotoBG.jpg");
 
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const onFocus = () => {
@@ -26,29 +28,34 @@ const LoginScreen = () => {
   return (
     <View style={styles.mainBox}>
       <ImageBackground source={image} style={styles.background}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.container}
-        >
-          <View
-            style={{
-              ...styles.inner,
-              marginBottom: isShowKeyboard ? -200 : 0,
-            }}
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}
           >
-            <View style={styles.titleBox}>
-              <Text style={styles.title}>Войти</Text>
+            <View
+              style={{
+                ...styles.inner,
+                marginBottom: isShowKeyboard ? -130 : 0,
+              }}
+            >
+              <View style={styles.titleBox}>
+                <Text style={styles.title}>Войти</Text>
+              </View>
+              <LoginForm onFocus={onFocus} onBlur={onBlur} />
+              <View style={styles.linkBox}>
+                <TouchableOpacity
+                  activeOpacity={0.7}
+                  onPress={() => navigation.navigate("Register")}
+                >
+                  <Text style={styles.link}>
+                    Нет аккаунта? Зарегистрироваться
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <LoginForm onFocus={onFocus} onBlur={onBlur} />
-            <View style={styles.linkBox}>
-              <TouchableOpacity activeOpacity={0.7}>
-                <Text style={styles.link}>
-                  Нет аккаунта? Зарегистрироваться
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
+          </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
       </ImageBackground>
     </View>
   );
@@ -103,6 +110,7 @@ const styles = StyleSheet.create({
   },
   background: {
     flex: 1,
+    justifyContent: "flex-end",
   },
   linkBox: {
     marginTop: 16,

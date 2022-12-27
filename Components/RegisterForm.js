@@ -103,7 +103,12 @@ const RegisterForm = ({ onFocus, onBlur }) => {
         />
         <Pressable
           onPress={handlePassVisibility}
-          style={{ position: "absolute", right: 16, top: "40%" }}
+          style={[
+            styles.innerText,
+            {
+              transform: [{ translateY: -10 }],
+            },
+          ]}
         >
           <Text style={styles.showField}>
             {!isPasswordVisibile ? "Показать" : "Скрыть"}
@@ -139,7 +144,13 @@ const styles = StyleSheet.create({
   },
   pressableBox: {
     position: "relative",
+
     marginBottom: 43,
+  },
+  innerText: {
+    position: "absolute",
+    right: 16,
+    top: "50%",
   },
   showField: {
     fontFamily: "Roboto400",
