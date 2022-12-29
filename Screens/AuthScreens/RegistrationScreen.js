@@ -56,11 +56,15 @@ const RegistrationScreen = ({ navigation }) => {
               isFocused={isShowKeyboard}
             />
             <View style={styles.linkBox}>
+              <Text style={styles.linkText}>Уже есть аккаунт?</Text>
               <TouchableOpacity
                 activeOpacity={0.7}
                 onPress={() => navigation.navigate("Login")}
+                style={styles.link}
               >
-                <Text style={styles.link}>Уже есть аккаунт? Войти</Text>
+                <Text style={{ ...styles.linkText, fontFamily: "Roboto500" }}>
+                  Войти
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -124,11 +128,15 @@ const styles = StyleSheet.create({
     marginTop: 16,
     alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
   },
-  link: {
+  linkText: {
     color: "#1B4371",
     fontFamily: "Roboto400",
     fontSize: 16,
     lineHeight: 19,
+  },
+  link: {
+    marginLeft: 2,
   },
 });

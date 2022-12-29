@@ -1,13 +1,6 @@
-import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback,
-  Keyboard,
-  Dimensions,
-} from "react-native";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as SplashScreen from "expo-splash-screen";
@@ -46,6 +39,7 @@ export default function App() {
   } else {
     SplashScreen.hideAsync();
   }
+
   const Stack = createStackNavigator();
   return (
     <NavigationContainer>
@@ -64,10 +58,4 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-// <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-// </TouchableWithoutFeedback>
-{
-  /* <StatusBar style="auto" /> */
 }

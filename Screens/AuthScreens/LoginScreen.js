@@ -44,12 +44,14 @@ const LoginScreen = ({ navigation }) => {
               </View>
               <LoginForm onFocus={onFocus} onBlur={onBlur} />
               <View style={styles.linkBox}>
+                <Text style={styles.linkText}>Нет аккаунта?</Text>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   onPress={() => navigation.navigate("Register")}
+                  style={styles.link}
                 >
-                  <Text style={styles.link}>
-                    Нет аккаунта? Зарегистрироваться
+                  <Text style={{ ...styles.linkText, fontFamily: "Roboto500" }}>
+                    Зарегистрироваться
                   </Text>
                 </TouchableOpacity>
               </View>
@@ -114,10 +116,13 @@ const styles = StyleSheet.create({
   },
   linkBox: {
     marginTop: 16,
-    alignItems: "center",
     justifyContent: "center",
+    flexDirection: "row",
   },
   link: {
+    marginLeft: 2,
+  },
+  linkText: {
     color: "#1B4371",
     fontFamily: "Roboto400",
     fontSize: 16,
