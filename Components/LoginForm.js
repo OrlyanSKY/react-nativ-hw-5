@@ -15,7 +15,7 @@ const initialState = {
   password: "",
 };
 
-const LoginForm = ({ onFocus, onBlur }) => {
+const LoginForm = ({ onFocus, onBlur, navigation }) => {
   const [state, setState] = useState(initialState);
 
   const [emailFocused, setEmailFocused] = useState(false);

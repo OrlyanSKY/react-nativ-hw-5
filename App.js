@@ -3,11 +3,14 @@ import { useFonts } from "expo-font";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import * as SplashScreen from "expo-splash-screen";
 
 import RegistrationScreen from "./Screens/AuthScreens/RegistrationScreen";
 import LoginScreen from "./Screens/AuthScreens/LoginScreen";
-import Home from "./Screens/Home";
+import Home from "./Screens/MainScreens/Home";
+
+import { useRouts } from "./useRouts";
 
 export default function App() {
   // useEffect(() => {
@@ -41,21 +44,8 @@ export default function App() {
   }
 
   const Stack = createStackNavigator();
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegistrationScreen}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Home" component={Home} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  const MainStack = createStackNavigator();
+  const navigation = useRouts(true);
+
+  return <NavigationContainer>{navigation}</NavigationContainer>;
 }
