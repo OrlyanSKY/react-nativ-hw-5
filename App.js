@@ -1,16 +1,9 @@
 import { useEffect } from "react";
 import { useFonts } from "expo-font";
-
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-
 import * as SplashScreen from "expo-splash-screen";
 
-import RegistrationScreen from "./Screens/AuthScreens/RegistrationScreen";
-import LoginScreen from "./Screens/AuthScreens/LoginScreen";
-import Home from "./Screens/MainScreens/Home";
-
-import { useRouts } from "./useRouts";
+import { NavigationContainer } from "@react-navigation/native";
+import { useRouts } from "./router";
 
 export default function App() {
   // useEffect(() => {
@@ -43,8 +36,6 @@ export default function App() {
     SplashScreen.hideAsync();
   }
 
-  const Stack = createStackNavigator();
-  const MainStack = createStackNavigator();
   const navigation = useRouts(true);
 
   return <NavigationContainer>{navigation}</NavigationContainer>;

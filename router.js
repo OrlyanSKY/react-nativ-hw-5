@@ -27,7 +27,11 @@ export const useRouts = (isAuth) => {
   }
   return (
     <MainStack.Navigator>
-      <MainStack.Screen name="Home" component={Home} />
+      <MainStack.Screen
+        name="Home"
+        component={Home}
+        options={{ headerShown: false }}
+      />
     </MainStack.Navigator>
   );
 };
